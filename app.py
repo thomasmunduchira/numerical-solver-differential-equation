@@ -7,35 +7,54 @@ class Application(Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.label_function = Label(self, text="Function:").pack()
-        self.function = Entry(self).pack()
+        self.label_function = Label(self, text="Function:")
+        self.label_function.pack()
+        self.function = Entry(self)
+        self.function.pack()
 
-        self.label_start_x = Label(self, text="Start x:").pack()
-        self.start_x = Entry(self).pack()
+        self.label_start_x = Label(self, text="Start x:")
+        self.label_start_x.pack()
+        self.start_x = Entry(self)
+        self.start_x.pack()
 
-        self.label_start_y = Label(self, text="Start y:").pack()
-        self.start_y = Entry(self).pack()
+        self.label_start_y = Label(self, text="Start y:")
+        self.label_start_y.pack()
+        self.start_y = Entry(self)
+        self.start_y.pack()
 
-        self.label_end_x = Label(self, text="End x:").pack()
-        self.end_x = Entry(self).pack()
+        self.label_end_x = Label(self, text="End x:")
+        self.label_end_x.pack()
+        self.end_x = Entry(self)
+        self.end_x.pack()
 
-        self.label_step = Label(self, text="Step size:").pack()
-        self.step = Entry(self).pack()
+        self.label_step = Label(self, text="Step size:")
+        self.label_step.pack()
+        self.step = Entry(self)
+        self.step.pack()
 
-        self.label_decimal = Label(self, text="Decimal places:").pack()
-        self.decimal = Entry(self).pack()
+        self.label_decimal = Label(self, text="Decimal places:")
+        self.label_decimal.pack()
+        self.decimal = Entry(self)
+        self.decimal.pack()
 
-        self.label_toggle = Label(self, text="Select method:").pack()
+        self.label_toggle = Label(self, text="Select method:")
+        self.label_toggle.pack()
         self.method_toggle = IntVar()
-        self.radiobutton_toggle_euler = Radiobutton(self, text="Euler", value=1, variable=self.method_toggle).pack(anchor=W)
-        self.radiobutton_toggle_improved_euler = Radiobutton(self, text="Improved Euler", value=2, variable=self.method_toggle).pack(anchor=W)
-        self.radiobutton_toggle_runge_kutta = Radiobutton(self, text="Runge Kutta", value=3, variable=self.method_toggle).pack(anchor=W)
+        self.radiobutton_toggle_euler = Radiobutton(self, text="Euler", value=1, variable=self.method_toggle)
+        self.radiobutton_toggle_euler.pack(anchor=W)
+        self.radiobutton_toggle_improved_euler = Radiobutton(self, text="Improved Euler", value=2, variable=self.method_toggle)
+        self.radiobutton_toggle_improved_euler.pack(anchor=W)
+        self.radiobutton_toggle_runge_kutta = Radiobutton(self, text="Runge Kutta", value=3, variable=self.method_toggle)
+        self.radiobutton_toggle_runge_kutta.pack(anchor=W)
 
-        self.button_calculate = Button(self, text="Calculate", command=self.calculate).pack()
+        self.button_calculate = Button(self, text="Calculate", command=self.calculate)
+        self.button_calculate.pack()
 
         self.label_result = Label(self)
+        self.label_result.pack()
 
-        self.button_close = Button(self, text="Close", fg="red", command=root.destroy).pack(side="bottom")
+        self.button_close = Button(self, text="Close", fg="red", command=root.destroy)
+        self.button_close.pack(side="bottom")
     
     def calculate(self):
         option = self.method_toggle.get()
