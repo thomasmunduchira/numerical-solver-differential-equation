@@ -4,58 +4,59 @@ from math import *
 class Application(Frame):
     def __init__(self, master):
         super().__init__(master)
-        self.pack()
+        self.grid()
         self.create_widgets()
 
     def create_widgets(self):
         self.label_function = Label(self, text="Function:")
-        self.label_function.pack()
+        self.label_function.grid(row=0, column=0)
         self.function = Entry(self)
-        self.function.pack()
+        self.function.grid(row=0, column=1)
 
         self.label_start_x = Label(self, text="Start x:")
-        self.label_start_x.pack()
+        self.label_start_x.grid(row=1, column=0)
         self.start_x = Entry(self)
-        self.start_x.pack()
+        self.start_x.grid(row=1, column=1)
 
         self.label_start_y = Label(self, text="Start y:")
-        self.label_start_y.pack()
+        self.label_start_y.grid(row=2, column=0)
         self.start_y = Entry(self)
-        self.start_y.pack()
+        self.start_y.grid(row=2, column=1)
 
         self.label_end_x = Label(self, text="End x:")
-        self.label_end_x.pack()
+        self.label_end_x.grid(row=3, column=0)
         self.end_x = Entry(self)
-        self.end_x.pack()
+        self.end_x.grid(row=3, column=1)
 
         self.label_step = Label(self, text="Step size:")
-        self.label_step.pack()
+        self.label_step.grid(row=4, column=0)
         self.step = Entry(self)
-        self.step.pack()
+        self.step.grid(row=4, column=1)
 
         self.label_decimal = Label(self, text="Decimal places:")
-        self.label_decimal.pack()
+        self.label_decimal.grid(row=5, column=0)
         self.decimal = Entry(self)
-        self.decimal.pack()
+        self.decimal.grid(row=5, column=1)
 
         self.label_toggle = Label(self, text="Select method:")
-        self.label_toggle.pack()
+        self.label_toggle.grid(row=6, column=0)
         self.method_toggle = IntVar()
         self.radiobutton_toggle_euler = Radiobutton(self, text="Euler", value=1, variable=self.method_toggle)
-        self.radiobutton_toggle_euler.pack(anchor=W)
+        self.radiobutton_toggle_euler.grid(row=6, column=1, sticky=W)
         self.radiobutton_toggle_improved_euler = Radiobutton(self, text="Improved Euler", value=2, variable=self.method_toggle)
-        self.radiobutton_toggle_improved_euler.pack(anchor=W)
+        self.radiobutton_toggle_euler.select()
+        self.radiobutton_toggle_improved_euler.grid(row=7, column=1, sticky=W)
         self.radiobutton_toggle_runge_kutta = Radiobutton(self, text="Runge Kutta", value=3, variable=self.method_toggle)
-        self.radiobutton_toggle_runge_kutta.pack(anchor=W)
+        self.radiobutton_toggle_runge_kutta.grid(row=8, column=1, sticky=W)
 
         self.button_calculate = Button(self, text="Calculate", command=self.calculate)
-        self.button_calculate.pack()
-
-        self.label_result = Label(self)
-        self.label_result.pack()
+        self.button_calculate.grid(row=9, column=0)
 
         self.button_close = Button(self, text="Close", fg="red", command=root.destroy)
-        self.button_close.pack(side="bottom")
+        self.button_close.grid(row=9, column=1, sticky=W)
+
+        self.label_result = Label(self)
+        self.label_result.grid(row=0, column=2, rowspan=9, columnspan=2)
     
     def calculate(self):
         option = self.method_toggle.get()
@@ -137,7 +138,7 @@ class Application(Frame):
 
 root = Tk()
 root.title("Numerical Solver of Differential Equations")
-root.geometry("500x1000")
+root.geometry("700x275")
 
 app = Application(root)
 app.mainloop()
