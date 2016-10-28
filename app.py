@@ -1,4 +1,5 @@
 from tkinter import *
+from math import *
 
 class Application(Frame):
     def __init__(self, master):
