@@ -90,13 +90,11 @@ class Application(Frame):
         n = 0
         while start_x < end_x:
             x, y = start_x, start_y
-            func_val = round(eval(function), decimal)
-            next_y = round(start_y + step * func_val, decimal)
-            result.append([n, start_x, start_y, func_val, next_y])
+            func_val = eval(function)
+            next_y = start_y + step * func_val
+            result.append([n, round(start_x, 2), round(start_y, decimal), round(func_val, decimal), round(next_y, decimal)])
             n += 1
-            n = round(n, 2)
             start_x += step
-            start_x = round(start_x, 2)
             start_y = next_y
         return result
 
@@ -106,16 +104,14 @@ class Application(Frame):
 
         while start_x < end_x:
             x, y = start_x, start_y
-            init_estimate = round(eval(function), decimal)
-            next_init_estimate = round(start_y + step * init_estimate, decimal)
+            init_estimate = eval(function)
+            next_init_estimate = start_y + step * init_estimate
             x, y = start_x + step, next_init_estimate
-            func_val = round(eval(function), decimal)
-            next_y = round(start_y + step * (init_estimate + func_val) / 2, decimal)
-            result.append([n, start_x, start_y, init_estimate, next_init_estimate, func_val, next_y])
+            func_val = eval(function)
+            next_y = start_y + step * (init_estimate + func_val) / 2
+            result.append([n, round(start_x, 2), round(start_y, decimal), round(init_estimate, decimal), round(next_init_estimate, decimal), round(func_val, decimal), round(next_y, decimal)])
             n += 1
-            n = round(n, 2)
             start_x += step
-            start_x = round(start_x, 2)
             start_y = next_y
         return result
 
@@ -125,21 +121,19 @@ class Application(Frame):
 
         while start_x < end_x:
             x, y = start_x, start_y
-            k1 = round(eval(function), decimal)
+            k1 = eval(function)
             x, y = start_x + 0.5*step, start_y + 0.5*step*k1
-            k2 = round(eval(function), decimal)
+            k2 = eval(function)
             y = start_y + 0.5*step*k2
-            k3 = round(eval(function), decimal)
+            k3 = eval(function)
             x, y = start_x + step, start_y + step*k3
-            k4 = round(eval(function), decimal)
-            next_y = round(start_y + step/6*(k1 + 2*k2 + 2*k3 + k4), decimal)
-            result.append([n, start_x, start_y, k1, k2, k3, k4, next_y])
+            k4 = eval(function)
+            next_y = start_y + step/6*(k1 + 2*k2 + 2*k3 + k4)
+            result.append([n, round(start_x, 2), round(start_y, decimal), round(k1, decimal), round(k2, decimal), round(k3, decimal), round(k4, decimal), round(next_y, decimal)])
             n += 1
-            n = round(n, 2)
             start_x += step
-            start_x = round(start_x, 2)
             start_y = next_y
-        return result    
+        return result
 
 root = Tk()
 root.title("Numerical Solver of Differential Equations")
