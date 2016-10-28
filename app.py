@@ -59,11 +59,11 @@ class Application(Frame):
     def calculate(self):
         option = self.method_toggle.get()
         function = self.function.get()
-        start_x = self.start_x.get()
-        start_y = self.start_y.get()
-        end_x = self.end_x.get()
-        step = self.step.get()
-        decimal = self.decimal.get()
+        start_x = float(self.start_x.get())
+        start_y = float(self.start_y.get())
+        end_x = float(self.end_x.get())
+        step = float(self.step.get())
+        decimal = int(self.decimal.get())
 
         if option == 1:
             result = self.euler_method(function, start_x, start_y, end_x, step, decimal)
@@ -76,12 +76,13 @@ class Application(Frame):
             self.display_result(result)
 
     def clear_result(self):
-        self.label_result.delete(0, END)
+        self.label_result["text"] = ""
 
     def display_result(self, list):
         self.clear_result()
         for element in list:
-            self.label_result.insert(END, element)
+            self.label_result["text"] = self.label_result["text"] + \
+            " ".join(map(str, element)) + "\n"
 
     def euler_method(self, function, start_x, start_y, end_x, step, decimal):
         result = [["n", "xn", "yn", "f(xn, yn)", "yn+1"]]
@@ -140,8 +141,8 @@ class Application(Frame):
         return result    
 
 root = Tk()
-root.title("Numerical Solution Calculator of Ordinary Differential Equations")
-root.geometry("500x500")
+root.title("Numerical Solver of Differential Equations")
+root.geometry("500x1000")
 
 app = Application(root)
 app.mainloop()
