@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Button, Entry, Frame, Label, IntVar, Radiobutton, Tk, W
 from math import *
 
 class Application(Frame):
@@ -34,7 +34,7 @@ class Application(Frame):
         self.step.grid(row=4, column=1)
 
         self.label_decimal = Label(self, text="Decimal places:")
-        self.label_decimal.grid(row=5, column=0)
+        self.label_decimal.grid(row=5, column=0, padx=15)
         self.decimal = Entry(self)
         self.decimal.grid(row=5, column=1)
 
@@ -55,8 +55,10 @@ class Application(Frame):
         self.button_close = Button(self, text="Close", fg="red", command=root.destroy)
         self.button_close.grid(row=9, column=1, sticky=W)
 
-        self.label_result = Label(self)
-        self.label_result.grid(row=0, column=2, rowspan=9, columnspan=2)
+        self.label_output = Label(self, text="Output:")
+        self.label_output.grid(row=0, column=2, padx=15)
+
+        self.output = []
     
     def calculate(self):
         option = self.method_toggle.get()
@@ -68,28 +70,35 @@ class Application(Frame):
         decimal = int(self.decimal.get())
 
         if option == 1:
-            result = self.euler_method(function, start_x, start_y, end_x, step, decimal)
-            self.display_result(result)
+            output = self.euler_method(function, start_x, start_y, end_x, step, decimal)
+            self.display_calculation(output)
         elif option == 2:
-            result = self.improved_euler_method(function, start_x, start_y, end_x, step, decimal)
-            self.display_result(result)
+            output = self.improved_euler_method(function, start_x, start_y, end_x, step, decimal)
+            self.display_calculation(output)
         else:
-            result = self.runge_kutta_method(function, start_x, start_y, end_x, step, decimal)
-            self.display_result(result)
+            output = self.runge_kutta_method(function, start_x, start_y, end_x, step, decimal)
+            self.display_calculation(output)
 
-    def clear_result(self):
-        self.label_result["text"] = ""
+    def clear_calculation(self):
+        for label in self.output:
+            label.destroy()
 
-    def display_result(self, list):
-        self.clear_result()
+    def display_calculation(self, list):
+        self.clear_calculation()
+        i = 1
         for element in list:
-            self.label_result["text"] = self.label_result["text"] + \
-            " ".join(map(str, element)) + "\n"
+            j = 2
+            for item in element:
+                calculation = Label(self, text=str(item))
+                calculation.grid(row=i, column=j, padx=10)
+                self.output.append(calculation)
+                j += 1
+            i += 1
 
     def euler_method(self, function, start_x, start_y, end_x, step, decimal):
         result = [["n", "xn", "yn", "f(xn, yn)", "yn+1"]]
         n = 0
-        while start_x < end_x:
+        while round(start_x, 2) < end_x:
             x, y = start_x, start_y
             func_val = eval(function)
             next_y = start_y + step * func_val
@@ -103,7 +112,7 @@ class Application(Frame):
         result = [["n", "xn", "yn", "f(xn, yn)", "y*n+1", "f(xn+1, y*n+1)", "yn+1"]]
         n = 0
 
-        while start_x < end_x:
+        while round(start_x, 2) < end_x:
             x, y = start_x, start_y
             init_estimate = eval(function)
             next_init_estimate = start_y + step * init_estimate
@@ -120,7 +129,7 @@ class Application(Frame):
         result = [["n", "xn", "yn", "k1", "k2", "k3", "k4", "yn+1"]]
         n = 0
 
-        while start_x < end_x:
+        while round(start_x, 2) < end_x:
             x, y = start_x, start_y
             k1 = eval(function)
             x, y = start_x + 0.5*step, start_y + 0.5*step*k1
@@ -138,7 +147,8 @@ class Application(Frame):
 
 root = Tk()
 root.title("Numerical Solver of Differential Equations")
-root.geometry("700x275")
+length, width = "940", "330"
+root.geometry(length + "x" + width)
 
 app = Application(root)
 app.mainloop()
