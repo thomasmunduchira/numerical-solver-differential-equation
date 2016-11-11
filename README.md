@@ -1,6 +1,7 @@
 # Numerical Solver of Differential Equations
 
 ## About
+
 A numerical solver for differential equations with the ability to use Euler's, Improved Euler's, and Runge Kutta methods.
 
 ## Build Instructions
