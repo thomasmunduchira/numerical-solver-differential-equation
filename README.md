@@ -5,12 +5,12 @@ A numerical solver for differential equations with the ability to use Euler's, I
 
 ## Build Instructions
 
-'''
+```
 $ python3 app.py 
-'''
+```
 
 ## Note
 
-The function entered should be a python-interpretable statement. Anything from the math module can also be used.
+The function entered should be a python-interpretable statement. Anything from the math module can be used.
 
-![alt tag](https://drive.google.com/open?id=0B6OeJXNpA0CIVEdVNVBtampsa0E)
+![alt tag](https://lh4.googleusercontent.com/oYyVSkGVMkr1GKVvK3sKoSOoEk5qDQKnNHdbTy5Y6-sK8JgQQ4PDChRWFR--_FM1aH8-uG2XyBnO-dE=w2560-h1254-rw)
